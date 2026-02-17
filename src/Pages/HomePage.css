@@ -26,7 +26,7 @@
     color: #000;
     margin-bottom: 1rem;
     letter-spacing: -3px;
-
+    line-height: 1.1;
 }
 
 .home-page-description {
@@ -55,6 +55,10 @@
     background-color: #c0c0c0b9;
     color: black;
     cursor: pointer;
+}
+
+.home-page.scrolled {
+   background-color: #000;
 }
 
 .home-page.scrolled .home-page-title,

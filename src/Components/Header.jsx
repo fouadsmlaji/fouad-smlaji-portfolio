@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import './Header.css'
 import logoTransparent from '../../public/assets/images/Logo/LogoTransparent.png'
 
@@ -40,7 +40,7 @@ export default function Header() {
           </ul>
         </div>
         <div className="header-nav-right">
-          <a href="/#contact" className="header-nav-button" onClick={closeMenu}>Contact</a>
+          <Link to="/#contact" className="header-nav-button" onClick={closeMenu}>Contact</Link>
         </div>
         <button
           type="button"
@@ -61,7 +61,7 @@ export default function Header() {
           <li><a href="#projects" className="header-mobile-link" onClick={closeMenu}>Projects</a></li>
           <li><a href="#contact" className="header-mobile-link" onClick={closeMenu}>Contact</a></li>
           <li>
-            <a href="/#contact" className="header-nav-button header-mobile-button" onClick={closeMenu}>Contact</a>
+            <Link to="/#contact" className="header-nav-button header-mobile-button" onClick={closeMenu}>Contact</Link>
           </li>
         </ul>
       </div>

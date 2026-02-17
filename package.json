@@ -1,8 +1,6 @@
 {
-  "name": "fouad-smlaji-portfolio",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://fouadsmlaji.github.io/fouad-smlaji-portfolio",
   "type": "module",
   "scripts": {
     "dev": "vite",

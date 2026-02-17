@@ -4,6 +4,14 @@
 @import '@fontsource/poppins/600.css';
 @import '@fontsource/poppins/700.css';
 
+@font-face {
+  font-family: 'HolidayFree';
+  src: url('/fonts/HolidayFree.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -15,4 +23,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease;
+}
+
+body.scrolled {
+  background-color: #000;
 }

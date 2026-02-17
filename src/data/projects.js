@@ -4,6 +4,7 @@ export const projects = [
     name: 'Alessandra Website',
     location: 'Italy',
     thumb: '/assets/images/Projects/AlessandraWebsite/thumbnail.png',
+    logo: '/assets/images/Projects/AlessandraWebsite/logo.png',
     objectPosition: '-85px',
     gallery: [
       '/assets/images/Projects/AlessandraWebsite/image1.png',
@@ -33,9 +34,9 @@ export const projects = [
     logo: '/assets/images/Projects/TruNeighbor/logo.png',
     objectPosition: '-40px',
     gallery: [
-      '/assets/images/Projects/TruNeighbor/Screenshot-2026-02-02-8.04.35-PM.png',
-      '/assets/images/Projects/TruNeighbor/Screenshot-2026-02-02-8.05.11-PM.png',
-      '/assets/images/Projects/TruNeighbor/Screenshot-2026-02-02-8.05.35-PM.png',
+      '/assets/images/Projects/TruNeighbor/image1.png',
+      '/assets/images/Projects/TruNeighbor/image2.png',
+      '/assets/images/Projects/TruNeighbor/image3.png',
     ],
     link: 'https://truneighbor.co',
     description: 'The Neighbor-to-Neighbor Delivery App. Local-first app that lets neighbors help each other with everyday shopping.',
@@ -99,7 +100,7 @@ export const projects = [
     name: 'Tasking Dev',
     location: 'Australia',
     thumb: '/assets/images/Projects/TaskingDevWebsite/thumbnail.png',
-    logo: '/assets/images/Projects/TaskingDevWebsite/logo.jpeg',
+    logo: '/assets/images/Projects/TaskingDevWebsite/logo.png',
     objectPosition: '-90px',
     gallery: [
       '/assets/images/Projects/TaskingDevWebsite/Image2.png',

@@ -205,8 +205,12 @@
     animation-duration: 8s;
   }
 
+  .header {
+    padding: 0.5rem 0;
+  }
+
   .header-logo {
-    height: 50px;
+    height: 35px;
   }
 
   /* Hero / Home */
@@ -363,14 +367,14 @@
   }
 
   .project-details-title {
-    font-size: 3rem;
-    letter-spacing: -2px;
+    font-size: 3rem !important;
+    letter-spacing: -3px !important;
     line-height: 1.15;
   }
 
   .project-details-body-title {
-    font-size: 3rem;
-    letter-spacing: -2px;
+    font-size: 3rem !important;
+    letter-spacing: -2px !important;
     line-height: 1.15;
   }
 }
