@@ -34,6 +34,16 @@ export default function HomePage() {
   }, [])
 
   useEffect(() => {
+    if (window.location.hash === '#contact') {
+      const id = setTimeout(() => {
+        const el = document.getElementById('contact')
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 100)
+      return () => clearTimeout(id)
+    }
+  }, [])
+
+  useEffect(() => {
     const target = projectsSectionRef.current
     if (!target) return undefined
 
