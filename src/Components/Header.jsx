@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import './Header.css'
-import logoTransparent from '../../public/assets/images/Logo/LogoTransparent.png'
+const logoUrl = `${import.meta.env.BASE_URL}assets/images/Logo/LogoTransparent.png`
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -29,7 +29,7 @@ export default function Header() {
     <header className={`header ${showScrolledBg ? 'header-scrolled' : ''} ${isProjectDetails ? 'header-project-page' : ''} ${menuOpen ? 'header-menu-open' : ''}`}>
       <nav className="header-nav">
         <div className="header-nav-left">
-          <img src={logoTransparent} alt="Fouad logo" className="header-logo" />
+          <img src={logoUrl} alt="Fouad logo" className="header-logo" />
         </div>
         <div className="header-nav-middle">
           <ul className="header-nav-links">

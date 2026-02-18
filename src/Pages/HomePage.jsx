@@ -2,8 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Parallax } from 'react-scroll-parallax'
 
-import introVideo from '../../public/assets/videos/intro.mp4'
-
 import { projects } from '../data/projects'
 import './HomePage.css'
 import '../Media.css'
@@ -197,7 +195,7 @@ export default function HomePage() {
       <div className="about-panel">
         <video
           className="about-panel-video"
-          src={introVideo}
+          src={`${import.meta.env.BASE_URL}assets/videos/Intro.mp4`}
           autoPlay
           loop
           muted
@@ -279,7 +277,7 @@ export default function HomePage() {
                 <span>Intentions</span>
                 <video
                   className="word-eye-video"
-                  src="/assets/videos/eye.mp4"
+                  src={`${import.meta.env.BASE_URL}assets/videos/eye.mp4`}
                   autoPlay
                   loop
                   muted
