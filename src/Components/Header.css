@@ -203,3 +203,36 @@ body.scrolled .header-logo {
   background-color: rgba(255, 255, 255, 0.9) !important;
   opacity: 1;
 }
+
+/* Shared portfolio navigation styling */
+.header { padding: .85rem 0; }
+.header-nav { max-width: 1480px; padding: 0 clamp(22px, 5vw, 72px); }
+.header-brand { display:inline-flex; align-items:center; }
+.header-logo { height:43px; width:auto; object-fit:contain; }
+.header-home-page .header-nav-link { color:#f3f0e8; font-size:.76rem; font-weight:500; letter-spacing:.04em; }
+.header-home-page .header-nav-links { gap:1.7rem; padding-right:0; }
+.header-home-page .header-nav-button { padding:10px 16px; background:#c6ed70; color:#181a17; font-size:.78rem; font-weight:600; }
+.header-home-page .header-nav-button:hover { background:#f3f0e8; color:#181a17; }
+.header-home-page .header-logo { filter:brightness(0) invert(1); }
+.header.header-home-page.header-scrolled { background:rgba(24,26,23,.88); border-bottom:1px solid rgba(255,255,255,.1); backdrop-filter:blur(18px); }
+body.scrolled .header-home-page .header-nav-link { color:#f3f0e8; }
+body.scrolled .header-home-page .header-nav-button { background:#c6ed70; color:#181a17; }
+body.scrolled .header-home-page .header-logo { filter:brightness(0) invert(1); }
+.header-project-page { border-bottom:1px solid rgba(24,26,23,.1); }
+.header-project-page .header-nav-link { color:#181a17; font-size:.76rem; font-weight:500; }
+.header-project-page .header-nav-button { background:#181a17; color:#f3f0e8; font-size:.78rem; }
+.header-project-page .header-logo { filter:brightness(0); }
+.header.header-menu-open { background:transparent; }
+.header:focus-within .header-nav-link,.header-nav-link:hover { color:#c6ed70; }
+.header-project-page:focus-within .header-nav-link,.header-project-page .header-nav-link:hover { color:#758e40; }
+.header-mobile-menu { background:#181a17; }
+.header-mobile-link { font-family:'Poppins',sans-serif; font-size:clamp(2rem,8vw,3.5rem); letter-spacing:-.05em; }
+.header-mobile-links { gap:1.2rem; }
+.header-mobile-button { font-size:.9rem; }
+@media (max-width:768px) {
+  .header-nav { padding:0 20px; }
+  .header-logo { height:37px; }
+  .header-home-page .header-hamburger { color:#f3f0e8; }
+  .header-project-page .header-hamburger { color:#181a17; }
+  .header.header-menu-open .header-hamburger { color:#f3f0e8; }
+}

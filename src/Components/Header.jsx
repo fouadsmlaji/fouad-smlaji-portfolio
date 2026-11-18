@@ -18,6 +18,16 @@ export default function Header() {
   const isProjectDetails = location.pathname.startsWith('/project')
   const isHome = location.pathname === '/' || location.pathname === ''
 
+  const handleSectionClick = (section, event) => {
+    event.preventDefault()
+    closeMenu()
+    if (isHome) {
+      document.getElementById(section)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    } else {
+      navigate({ pathname: '/', hash: `#${section}` })
+    }
+  }
+
   useEffect(() => {
     const check = () => setScrolled(window.scrollY > 50)
     check()
@@ -40,22 +50,22 @@ export default function Header() {
     if (isHome) {
       scrollToContact()
     } else {
-      navigate({ pathname: '/', hash: 'contact' })
+      navigate({ pathname: '/', hash: '#contact' })
     }
   }
 
   const headerContent = (
     <>
-      <header className={`header ${showScrolledBg ? 'header-scrolled' : ''} ${isProjectDetails ? 'header-project-page' : ''} ${menuOpen ? 'header-menu-open' : ''}`}>
+      <header className={`header ${showScrolledBg ? 'header-scrolled' : ''} ${isProjectDetails ? 'header-project-page' : ''} ${isHome ? 'header-home-page' : ''} ${menuOpen ? 'header-menu-open' : ''}`}>
         <nav className="header-nav">
           <div className="header-nav-left">
-            <img src={logoUrl} alt="Fouad logo" className="header-logo" />
+            <a href={import.meta.env.BASE_URL} className="header-brand" aria-label="Fouad Smlaji home"><img src={logoUrl} alt="Fouad logo" className="header-logo" /></a>
           </div>
           <div className="header-nav-middle">
             <ul className="header-nav-links">
-              <li><a href="#home" className="header-nav-link" onClick={closeMenu}>Home</a></li>
-              <li><a href="#about" className="header-nav-link" onClick={closeMenu}>About</a></li>
-              <li><a href="#projects" className="header-nav-link" onClick={closeMenu}>Projects</a></li>
+              <li><a href={`${import.meta.env.BASE_URL}#home`} className="header-nav-link" onClick={(e) => handleSectionClick('home', e)}>Home</a></li>
+              <li><a href={`${import.meta.env.BASE_URL}#about`} className="header-nav-link" onClick={(e) => handleSectionClick('about', e)}>About</a></li>
+              <li><a href={`${import.meta.env.BASE_URL}#projects`} className="header-nav-link" onClick={(e) => handleSectionClick('projects', e)}>Projects</a></li>
               <li><a href="#contact" className="header-nav-link" onClick={handleContactClick}>Contact</a></li>
             </ul>
           </div>
@@ -81,13 +91,10 @@ export default function Header() {
         onClick={closeMenu}
       >
         <ul className="header-mobile-links" onClick={(e) => e.stopPropagation()}>
-          <li><a href="#home" className="header-mobile-link" onClick={closeMenu}>Home</a></li>
-          <li><a href="#about" className="header-mobile-link" onClick={closeMenu}>About</a></li>
-          <li><a href="#projects" className="header-mobile-link" onClick={closeMenu}>Projects</a></li>
+          <li><a href={`${import.meta.env.BASE_URL}#home`} className="header-mobile-link" onClick={(e) => handleSectionClick('home', e)}>Home</a></li>
+          <li><a href={`${import.meta.env.BASE_URL}#about`} className="header-mobile-link" onClick={(e) => handleSectionClick('about', e)}>About</a></li>
+          <li><a href={`${import.meta.env.BASE_URL}#projects`} className="header-mobile-link" onClick={(e) => handleSectionClick('projects', e)}>Projects</a></li>
           <li><a href="#contact" className="header-mobile-link" onClick={handleContactClick}>Contact</a></li>
-          <li>
-            <a href="#contact" className="header-nav-button header-mobile-button" onClick={handleContactClick}>Contact</a>
-          </li>
         </ul>
       </div>
     </>

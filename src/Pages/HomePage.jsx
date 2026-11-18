@@ -1,356 +1,95 @@
-import { useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { Parallax } from 'react-scroll-parallax'
-
+import { useEffect, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
 import { projects } from '../data/projects'
 import './HomePage.css'
-import '../Media.css'
+
+const toolkit = ['JavaScript', 'React', 'Vue', 'CSS', 'Tailwind', 'Bootstrap', 'Sass', 'PostgreSQL']
+const process = [
+  { number: '01', title: 'Listen closely', text: 'Start with the people, the problem, and what success should feel like.' },
+  { number: '02', title: 'Shape the idea', text: 'Find the clearest story, then turn it into a thoughtful visual system.' },
+  { number: '03', title: 'Make it real', text: 'Build, refine, and launch a fast experience that feels right everywhere.' },
+]
 
 export default function HomePage() {
-  const [isScrolled, setIsScrolled] = useState(false)
   const [showAllProjects, setShowAllProjects] = useState(false)
-
-  const aboutSectionRef = useRef(null)
-  const projectsSectionRef = useRef(null)
-  const wordsSectionRef = useRef(null)
-
-  const [aboutVisible, setAboutVisible] = useState(false)
-  const [projectsVisible, setProjectsVisible] = useState(false)
-  const [wordsVisible, setWordsVisible] = useState(false)
-  const invertSectionRef = useRef(null)
-  const [invertVisible, setInvertVisible] = useState(false)
+  const visibleProjects = showAllProjects ? projects : projects.slice(0, 4)
+  const location = useLocation()
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10)
-    }
-
-    handleScroll()
-    window.addEventListener('scroll', handleScroll, { passive: true })
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (window.location.hash === '#contact') {
-      const id = setTimeout(() => {
-        const el = document.getElementById('contact')
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      }, 100)
-      return () => clearTimeout(id)
-    }
-  }, [])
-
-  useEffect(() => {
-    const target = projectsSectionRef.current
-    if (!target) return undefined
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setProjectsVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.3 }
-    )
-
-    observer.observe(target)
-
-    return () => {
-      observer.disconnect()
-    }
-  }, [])
-
-  useEffect(() => {
-    document.body.classList.toggle('scrolled', isScrolled)
-    return () => document.body.classList.remove('scrolled')
-  }, [isScrolled])
-
-  useEffect(() => {
-    const target = aboutSectionRef.current
-    if (!target) return undefined
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setAboutVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.4 }
-    )
-
-    observer.observe(target)
-
-    return () => {
-      observer.disconnect()
-    }
-  }, [])
-
-  useEffect(() => {
-    const target = wordsSectionRef.current
-    if (!target) return undefined
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setWordsVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.4 }
-    )
-
-    observer.observe(target)
-
-    return () => {
-      observer.disconnect()
-    }
-  }, [])
-
-  useEffect(() => {
-    const section = aboutSectionRef.current
-    if (!section) return undefined
-
-    let rafId = null
-    const minWidth = 70
-    const maxWidth = 100
-    const minHeight = 420
-    const maxHeight = 1020
-    const minOffset = 60
-    const maxOffset = -60
-    const minDepth = -60
-    const maxDepth = 30
-
-    const update = () => {
-      const rect = section.getBoundingClientRect()
-      const viewport = window.innerHeight || 1
-      const start = viewport
-      const end = -rect.height * 0.2
-      const progress = 1 - Math.min(Math.max((rect.top - end) / (start - end), 0), 1)
-
-      const width = minWidth + progress * (maxWidth - minWidth)
-      const height = minHeight + progress * (maxHeight - minHeight)
-      const offset = minOffset + progress * (maxOffset - minOffset)
-      const depth = minDepth + progress * (maxDepth - minDepth)
-
-      section.style.setProperty('--about-panel-width', `${width}%`)
-      section.style.setProperty('--about-panel-height', `${height}px`)
-      section.style.setProperty('--about-panel-offset', `${offset}px`)
-      section.style.setProperty('--about-panel-depth', `${depth}px`)
-      rafId = null
-    }
-
-    const onScroll = () => {
-      if (rafId !== null) return
-      rafId = window.requestAnimationFrame(update)
-    }
-
-    update()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    window.addEventListener('resize', onScroll)
-
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onScroll)
-      if (rafId !== null) {
-        window.cancelAnimationFrame(rafId)
-      }
-    }
-  }, [])
-
-
+    if (!location.hash) return
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById(location.hash.slice(1))?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
+    return () => window.cancelAnimationFrame(frame)
+  }, [location.hash])
 
   return (
-   <div id="home" className={`home-page ${isScrolled ? 'scrolled' : ''}`}>
-    <div className="home-page-content">
-    <p className="hero-eyebrow fadeIn"><span /> Independent designer & developer</p>
-    <h1 className="home-page-title fadeIn">
-      Thoughtful digital<br /><em>experiences</em> that work.
-    </h1>
-    <p className="home-page-description fadeIn">
-      I’m Fouad — I turn ambitious ideas into clear, considered websites and products.
-    </p>
-    <div className="hero-actions fadeIn">
-      <a href="#projects" className="home-page-button">Explore my work <span aria-hidden="true">↗</span></a>
-      <a href="#contact" className="hero-text-link">Have a project in mind? <span>Let’s talk ↗</span></a>
-    </div>
-    </div>
-
-    <section className="banner-section" aria-label="Programming values banner">
-      <div className="banner-track">
-        <span className="banner-text">
-          Code with purpose • Build for people • Ship with care • Debug with
-          patience • Learn endlessly •
-        </span>
-        <span className="banner-text" aria-hidden="true">
-          Code with purpose • Build for people • Ship with care • Debug with
-          patience • Learn endlessly •
-        </span>
-      </div>
-    </section>
-
-    <section
-      id="about"
-      ref={aboutSectionRef}
-      className={`about-section ${aboutVisible ? 'about-visible' : ''}`}
-    >
-      <h2 className="about-title">
-        <span className="about-title-line">Good work starts with</span>
-        <span className="about-title-line">understanding people.</span>
-      </h2>
-      <p className="about-description">From the first sketch to the final line of code, I bring design and engineering together to make digital experiences feel effortless.</p>
-      <div className="about-panel">
-        <video
-          className="about-panel-video"
-          src={`${import.meta.env.BASE_URL}assets/videos/Intro.mp4`}
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
-      </div>
-    </section>
-
-    <section
-      id="projects"
-      className={`projects-showcase ${projectsVisible ? 'projects-visible' : ''}`}
-      ref={projectsSectionRef}
-    >
-      <div className="container">
-        <div className="projects-header">
-          <div><p className="section-kicker">A few things I’ve made</p><h2 className="projects-title">Selected work<span>.</span></h2></div>
-          <div className="projects-actions">
-            <a href="#contact" className="projects-button primary">Start a project <span aria-hidden="true">↗</span></a>
-            <button
-              className="projects-button"
-              type="button"
-              onClick={() => setShowAllProjects((prev) => !prev)}
-            >
-              {showAllProjects ? 'Show less' : 'View all projects'}
-            </button>
+    <main id="home" className="home-page portfolio-page">
+      <section className="hero-section" aria-labelledby="hero-title">
+        <div className="hero-orbit hero-orbit-one" aria-hidden="true" />
+        <div className="hero-orbit hero-orbit-two" aria-hidden="true" />
+        <div className="hero-grid">
+          <div className="hero-copy">
+            <p className="hero-eyebrow"><span className="status-dot" /> Independent designer & developer <span className="hero-location">Based in Syria · Working worldwide</span></p>
+            <h1 id="hero-title" className="home-page-title">I make digital<br /><em>feel different.</em></h1>
+            <p className="home-page-description">I’m Fouad Smlaji. I bring thoughtful design and careful engineering together to make useful things feel unmistakably human.</p>
+            <div className="hero-actions">
+              <a href="#projects" className="home-page-button">Explore selected work <span aria-hidden="true">↘</span></a>
+              <a href="#about" className="hero-text-link">A little about me <span aria-hidden="true">↓</span></a>
+            </div>
+            <div className="hero-footnote"><span>Independent practice</span><span>Design · Development · Direction</span></div>
+          </div>
+          <div className="hero-art" aria-label="A glimpse into Fouad’s creative process">
+            <div className="hero-art-topline"><span>IDEAS IN MOTION</span><span>© FS — {new Date().getFullYear()}</span></div>
+            <div className="hero-video-wrap">
+              <video src={`${import.meta.env.BASE_URL}assets/videos/Intro.mp4`} autoPlay loop muted playsInline aria-label="Abstract creative process animation" />
+              <span className="hero-video-caption">Curiosity, made visible.</span>
+            </div>
+            <div className="hero-art-stamp" aria-hidden="true"><span>GOOD<br />THINGS<br />TAKE<br /><i>intention</i></span><b>✳</b></div>
+            <div className="hero-art-bottom"><span>DESIGN THAT THINKS.</span><span>CODE THAT CARES.</span></div>
           </div>
         </div>
-        <div className={`projects-cards ${showAllProjects ? 'show-all' : ''}`}>
-          {(showAllProjects ? projects : projects.slice(0, 4)).map((project, index) => (
-            <Link
-              key={project.name}
-              to={`/project/${index}`}
-              className={`project-item ${showAllProjects && index >= 4 ? 'project-item-extra' : ''}`}
-            >
-              <article className="project-card">
-                <span className="project-index" aria-hidden="true">{String(index + 1).padStart(2, '0')} <i>/ {String(projects.length).padStart(2, '0')}</i></span>
-                <div className="project-thumb">
-                  <img
-                    src={project.thumb}
-                    alt={project.name}
-                    style={project.objectPosition ? { objectPosition: project.objectPosition } : undefined}
-                  />
-                </div>
-                <span className="project-open" aria-hidden="true">↗</span>
-              </article>
-              <div className="project-meta">
-                <div className="project-meta-row">
-                  <div className="project-icon">
-                    <img src={project.logo || project.thumb} alt="" />
-                  </div>
-                  <div className="project-text">
-                    <span className="project-name">{project.name}</span>
-                    <span className="project-location">{project.location}</span>
-                  </div>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
-    
-    <section
-      className={`Words-container ${wordsVisible ? 'words-visible' : ''}`}
-      ref={wordsSectionRef}
-    >
-      <div className="words-arc" aria-hidden="true" />
-      <div className="word-bubbles" aria-hidden="true">
-        <span className="word-bubble bubble-1"></span>
-        <span className="word-bubble bubble-2"></span>
-        <span className="word-bubble bubble-3"></span>
-        <span className="word-bubble bubble-4"></span>
-        <span className="word-bubble bubble-5"></span>
-      </div>
-      <div className="words-container">
-        <div className="word">
-          <Parallax translateY={[200, -200]}>
-            <h2 className="word-title">
-              <span>Interfaces Whisper </span>
-              <span className="word-line">
-                <span>Intentions</span>
-                <video
-                  className="word-eye-video"
-                  src={`${import.meta.env.BASE_URL}assets/videos/eye.mp4`}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                />
-                <span>Clearly.</span>
-              </span>
-            </h2>
-          </Parallax>
-        </div>
-      </div>
-    </section>
+        <a className="hero-scroll-cue" href="#about" aria-label="Scroll to about section"><span /> Scroll to explore</a>
+      </section>
 
-    <section
-      className={`Words-container invert-section ${
-        invertVisible ? 'invert-visible words-visible' : ''
-      }`}
-      ref={invertSectionRef}
-    >
-      <div className="invert-arc" aria-hidden="true"></div>
-     
-    </section>
-
-    <section id="contact" className="contact-section">
-      <div className="contact-content">
-        <p className="section-kicker">Have a good one in mind?</p>
-        <h2 className="contact-title">Let’s make it<br /><em>real.</em></h2>
-        <p className="contact-subtitle">
-          Tell me what you’re working on. I’d love to hear about it.
-        </p>
-        <div className="contact-socials">
-          <a className="contact-link" href="https://www.linkedin.com/in/fouad-smlaji-3272263a2" target="_blank" rel="noreferrer" aria-label="LinkedIn">
-            <svg className="contact-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-            </svg>
-            LinkedIn
-          </a>
-          <a className="contact-link" href="https://github.com/fouadsmlaji" target="_blank" rel="noreferrer" aria-label="GitHub">
-            <svg className="contact-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-            </svg>
-            GitHub
-          </a>
-          <a className="contact-link" href="tel:+96358987736" aria-label="Phone">
-            <svg className="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-            </svg>
-            +963 958 987 736
-          </a>
-          <a className="contact-link" href="mailto:fouad.smlaji@gmail.com" aria-label="Email">
-            <svg className="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
-            </svg>
-            Email
-          </a>
-        </div>
+      <div className="ticker" aria-label="Design with intention. Build for people. Make it matter.">
+        <div className="ticker-track" aria-hidden="true">{Array.from({ length: 4 }, (_, i) => <span key={i}>Design with intention <i>✳</i> Build for people <i>✳</i> Make it matter <i>✳</i></span>)}</div>
       </div>
-      <div className="contact-arc" aria-hidden="true" />
-    </section>
-    </div>
+
+      <section id="about" className="about-section portfolio-about">
+        <div className="section-label"><span>01 / A little about me</span><span>Curiosity, craft, and care</span></div>
+        <div className="about-layout">
+          <div className="about-heading-wrap"><p className="section-kicker">The person behind the pixels</p><h2 className="about-title">Good work<br />starts with<br /><em>good questions.</em></h2></div>
+          <div className="about-copy"><p className="about-lead">I’m a designer and developer who cares about how things work, how they look, and most of all, how they make people feel.</p><p>I partner with people who want to make something meaningful. I help shape the idea, find its visual voice, and bring it to life on the web — with clarity at every step.</p><a href="#contact" className="inline-link">A project on your mind? <span aria-hidden="true">↗</span></a></div>
+        </div>
+        <div className="toolkit-row"><div className="toolkit-label"><span className="toolkit-star">✳</span><div><b>My toolkit</b><small>Tools I reach for</small></div></div><div className="toolkit-list">{toolkit.map((item) => <span key={item}>{item}</span>)}</div></div>
+      </section>
+
+      <section id="projects" className="projects-showcase portfolio-projects">
+        <div className="projects-inner">
+          <div className="section-label section-label-light"><span>02 / Selected work</span><span>A collection of collaborations</span></div>
+          <div className="projects-header"><div><p className="section-kicker">A few things I’ve made</p><h2 className="projects-title">Made with<br /><em>meaning.</em></h2></div><p className="projects-intro">Different people, different challenges. One shared belief: the details make the difference.</p></div>
+          <div className="projects-cards">
+            {visibleProjects.map((project, index) => (
+              <Link key={project.name} to={`/project/${index}`} className="project-item">
+                <article className="project-card"><span className="project-index" aria-hidden="true">{String(index + 1).padStart(2, '0')} <i>/ {String(projects.length).padStart(2, '0')}</i></span><div className="project-thumb"><img src={project.thumb} alt={project.name} style={project.objectPosition ? { objectPosition: project.objectPosition } : undefined} loading={index > 1 ? 'lazy' : 'eager'} /></div><span className="project-open" aria-hidden="true">↗</span></article>
+                <div className="project-meta"><div className="project-meta-row"><div className="project-icon"><img src={project.logo || project.thumb} alt="" loading="lazy" /></div><div className="project-text"><span className="project-name">{project.name}</span><span className="project-location">{project.location}</span></div></div><span className="project-meta-arrow" aria-hidden="true">↗</span></div>
+              </Link>
+            ))}
+          </div>
+          <div className="projects-footer"><button className="projects-button" type="button" onClick={() => setShowAllProjects((prev) => !prev)}>{showAllProjects ? 'Show fewer projects' : 'Explore all projects'} <span aria-hidden="true">{showAllProjects ? '↑' : '↓'}</span></button></div>
+        </div>
+      </section>
+
+      <section className="approach-section">
+        <div className="approach-inner"><div className="section-label"><span>03 / How I work</span><span>Simple on purpose</span></div><div className="approach-heading"><p className="section-kicker">From first thought to final detail</p><h2>A good process<br />makes room for <em>good work.</em></h2></div><div className="process-grid">{process.map((step) => <article className="process-card" key={step.number}><span className="process-number">{step.number}</span><span className="process-mark" aria-hidden="true">↗</span><h3>{step.title}</h3><p>{step.text}</p></article>)}</div><div className="approach-note"><span>✳</span> Thoughtful by design. Built to last.</div></div>
+      </section>
+
+      <section id="contact" className="contact-section portfolio-contact">
+        <div className="contact-orbit" aria-hidden="true" />
+        <div className="contact-content"><p className="section-kicker">04 / Your turn</p><p className="contact-pretitle">Have a good one in mind?</p><h2 className="contact-title">Let’s make it<br /><em>real.</em></h2><p className="contact-subtitle">Tell me what you’re working on. I’d love to hear about it.</p><a className="contact-email" href="mailto:fouad.smlaji@gmail.com">fouad.smlaji@gmail.com <span aria-hidden="true">↗</span></a><div className="contact-socials"><a className="contact-link" href="https://www.linkedin.com/in/fouad-smlaji-3272263a2" target="_blank" rel="noreferrer">LinkedIn ↗</a><a className="contact-link" href="https://github.com/fouadsmlaji" target="_blank" rel="noreferrer">GitHub ↗</a><a className="contact-link" href="tel:+96358987736">+963 958 987 736</a></div></div>
+        <footer className="site-footer"><a href="#home">FOUAD SMLAJI <span>© {new Date().getFullYear()}</span></a><span>Made with curiosity and care <b>✳</b></span><a href="#home">Back to top ↑</a></footer>
+      </section>
+    </main>
   )
 }
