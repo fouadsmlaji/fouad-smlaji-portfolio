@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { projects } from '../data/projects'
 import './HomePage.css'
 
-const toolkit = ['JavaScript', 'React', 'Vue', 'CSS', 'Tailwind', 'Bootstrap', 'Sass', 'PostgreSQL']
+const toolkit = ['Cursor', 'Claude', 'ChatGPT', 'Codex', 'JavaScript', 'React', 'Next.js', 'Angular', 'Vue', 'React Native', 'Expo', 'Node.js', 'Express', 'CSS', 'Tailwind', 'Bootstrap', 'Sass', 'PostgreSQL', 'MySQL', 'AWS', 'Docker', 'Git', 'GitHub']
 const process = [
   { number: '01', title: 'Listen closely', text: 'Start with the people, the problem, and what success should feel like.' },
   { number: '02', title: 'Shape the idea', text: 'Find the clearest story, then turn it into a thoughtful visual system.' },
