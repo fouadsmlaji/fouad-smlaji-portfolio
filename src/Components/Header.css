@@ -236,6 +236,9 @@ body.scrolled .header-home-page .header-logo { filter:brightness(0) invert(1); }
 @media (max-width:768px) {
   .header { padding: .65rem 0; }
   .header-nav { padding:0 22px; }
+  /* Keep desktop navigation out of the compact header; the overlay owns mobile links. */
+  .header-nav-middle,
+  .header-nav-right { display:none; }
   .header-logo { height:37px; }
   .header-hamburger { display:flex; align-items:center; justify-content:center; border:1px solid rgba(243,240,232,.28); border-radius:50%; background:rgba(24,26,23,.35); backdrop-filter:blur(10px); }
   .header-hamburger-line { width:20px; }
