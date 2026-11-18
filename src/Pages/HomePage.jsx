@@ -242,6 +242,7 @@ export default function HomePage() {
               className={`project-item ${showAllProjects && index >= 4 ? 'project-item-extra' : ''}`}
             >
               <article className="project-card">
+                <span className="project-index" aria-hidden="true">{String(index + 1).padStart(2, '0')} <i>/ {String(projects.length).padStart(2, '0')}</i></span>
                 <div className="project-thumb">
                   <img
                     src={project.thumb}
@@ -249,6 +250,7 @@ export default function HomePage() {
                     style={project.objectPosition ? { objectPosition: project.objectPosition } : undefined}
                   />
                 </div>
+                <span className="project-open" aria-hidden="true">↗</span>
               </article>
               <div className="project-meta">
                 <div className="project-meta-row">
