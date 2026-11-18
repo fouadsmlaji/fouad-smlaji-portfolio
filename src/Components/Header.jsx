@@ -57,6 +57,15 @@ export default function Header() {
     return () => { document.body.style.overflow = '' }
   }, [menuOpen])
 
+  useEffect(() => {
+    if (!menuOpen) return undefined
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') closeMenu()
+    }
+    window.addEventListener('keydown', closeOnEscape)
+    return () => window.removeEventListener('keydown', closeOnEscape)
+  }, [menuOpen])
+
   const showScrolledBg = scrolled && !isProjectDetails
   const closeMenu = () => setMenuOpen(false)
 
@@ -105,6 +114,7 @@ export default function Header() {
       <div
         className="header-mobile-menu"
         aria-hidden={!menuOpen}
+        inert={!menuOpen}
         onClick={closeMenu}
       >
         <ul className="header-mobile-links" onClick={(e) => e.stopPropagation()}>

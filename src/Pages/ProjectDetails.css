@@ -28,7 +28,6 @@
 .project-details-body { padding:5px 0 0; }
 .project-details-description { margin:0; color:#54564f; font-size:.91rem; line-height:1.9; white-space:pre-line; }
 .project-details-note { display:flex; gap:12px; align-items:flex-start; margin-top:24px; padding-top:17px; border-top:1px solid rgba(24,26,23,.15); }
-.project-details-note span { color:#82964b; }
 .project-details-note p { max-width:310px; margin:0; color:#7a7c73; font-size:.72rem; line-height:1.7; }
 .project-gallery-section { padding:75px 0 95px; }
 .project-gallery-heading { display:flex; justify-content:space-between; align-items:end; margin-bottom:32px; }

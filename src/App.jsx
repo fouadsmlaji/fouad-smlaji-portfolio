@@ -33,7 +33,6 @@ function App() {
             <div className="intro-loader-track" aria-hidden="true"><span /></div>
             <div className="intro-loader-foot"><span>INDEPENDENT DESIGNER & DEVELOPER</span><span>FS — {new Date().getFullYear()}</span></div>
           </div>
-          <span className="intro-loader-orbit" aria-hidden="true">✳</span>
         </div>
       )}
       <Header />

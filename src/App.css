@@ -82,22 +82,10 @@ body {
   letter-spacing: .1em;
 }
 
-.intro-loader-orbit {
-  position: absolute;
-  right: 12%;
-  bottom: 8%;
-  color: rgba(198,237,112,.14);
-  font-size: clamp(12rem, 34vw, 34rem);
-  line-height: 1;
-  animation: orbitTurn 22s linear infinite;
-}
-
 @keyframes loaderProgress { to { transform: scaleX(1); } }
-@keyframes orbitTurn { to { transform: rotate(360deg); } }
 @keyframes introCurtain { to { transform: translateY(-101%); visibility: hidden; } }
 
 @media (prefers-reduced-motion: reduce) {
   .intro-loader { animation:none; }
   .intro-loader-track span { animation:none; transform:scaleX(1); }
-  .intro-loader-orbit { animation:none; }
 }

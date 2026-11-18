@@ -83,7 +83,7 @@ export default function HomePage() {
               <video src={`${import.meta.env.BASE_URL}assets/videos/Intro.mp4`} autoPlay loop muted playsInline aria-label="Abstract creative process animation" />
               <span className="hero-video-caption">Curiosity, made visible.</span>
             </div>
-            <div className="hero-art-stamp" aria-hidden="true"><span>GOOD<br />THINGS<br />TAKE<br /><i>intention</i></span><b>✳</b></div>
+            <div className="hero-art-stamp" aria-hidden="true"><span>GOOD<br />THINGS<br />TAKE<br /><i>intention</i></span></div>
             <div className="hero-art-bottom"><span>DESIGN THAT THINKS.</span><span>CODE THAT CARES.</span></div>
           </div>
         </div>
@@ -91,7 +91,7 @@ export default function HomePage() {
       </section>
 
       <div className="ticker" aria-label="Design with intention. Build for people. Make it matter.">
-        <div className="ticker-track" aria-hidden="true">{Array.from({ length: 4 }, (_, i) => <span key={i}>Design with intention <i>✳</i> Build for people <i>✳</i> Make it matter <i>✳</i></span>)}</div>
+        <div className="ticker-track" aria-hidden="true">{Array.from({ length: 4 }, (_, i) => <span key={i}>Design with intention · Build for people · Make it matter</span>)}</div>
       </div>
 
       <section id="about" className="about-section portfolio-about">
@@ -100,7 +100,7 @@ export default function HomePage() {
           <div className="about-heading-wrap" data-reveal="up"><p className="section-kicker">The person behind the pixels</p><h2 className="about-title">Good work<br />starts with<br /><em>good questions.</em></h2></div>
           <div className="about-copy" data-reveal="up" style={{ '--reveal-delay': '120ms' }}><p className="about-lead">I’m a designer and developer who cares about how things work, how they look, and most of all, how they make people feel.</p><p>I partner with people who want to make something meaningful. I help shape the idea, find its visual voice, and bring it to life on the web — with clarity at every step.</p><a href="#contact" className="inline-link">A project on your mind? <span aria-hidden="true">↗</span></a></div>
         </div>
-        <div className="toolkit-row" data-reveal="up"><div className="toolkit-label"><span className="toolkit-star">✳</span><div><b>My toolkit</b><small>Tools I reach for</small></div></div><div className="toolkit-list">{toolkit.map((item, index) => <span key={item} style={{ '--reveal-delay': `${index * 45}ms` }}>{item}</span>)}</div></div>
+        <div className="toolkit-row" data-reveal="up"><div className="toolkit-label"><div><b>My toolkit</b><small>Tools I reach for</small></div></div><div className="toolkit-list">{toolkit.map((item, index) => <span key={item} style={{ '--reveal-delay': `${index * 45}ms` }}>{item}</span>)}</div></div>
       </section>
 
       <section id="projects" className="projects-showcase portfolio-projects">
@@ -120,13 +120,13 @@ export default function HomePage() {
       </section>
 
       <section className="approach-section">
-        <div className="approach-inner"><div className="section-label" data-reveal="up"><span>03 / How I work</span><span>Simple on purpose</span></div><div className="approach-heading" data-reveal="up"><p className="section-kicker">From first thought to final detail</p><h2>A good process<br />makes room for <em>good work.</em></h2></div><div className="process-grid">{process.map((step, index) => <article className="process-card" data-reveal="up" style={{ '--reveal-delay': `${index * 100}ms` }} key={step.number}><span className="process-number">{step.number}</span><span className="process-mark" aria-hidden="true">↗</span><h3>{step.title}</h3><p>{step.text}</p></article>)}</div><div className="approach-note" data-reveal="up"><span>✳</span> Thoughtful by design. Built to last.</div></div>
+        <div className="approach-inner"><div className="section-label" data-reveal="up"><span>03 / How I work</span><span>Simple on purpose</span></div><div className="approach-heading" data-reveal="up"><p className="section-kicker">From first thought to final detail</p><h2>A good process<br />makes room for <em>good work.</em></h2></div><div className="process-grid">{process.map((step, index) => <article className="process-card" data-reveal="up" style={{ '--reveal-delay': `${index * 100}ms` }} key={step.number}><span className="process-number">{step.number}</span><span className="process-mark" aria-hidden="true">↗</span><h3>{step.title}</h3><p>{step.text}</p></article>)}</div><div className="approach-note" data-reveal="up">Thoughtful by design. Built to last.</div></div>
       </section>
 
       <section id="contact" className="contact-section portfolio-contact">
         <div className="contact-orbit" aria-hidden="true" />
         <div className="contact-content" data-reveal="up"><p className="section-kicker">04 / Your turn</p><p className="contact-pretitle">Have a good one in mind?</p><h2 className="contact-title">Let’s make it<br /><em>real.</em></h2><p className="contact-subtitle">Tell me what you’re working on. I’d love to hear about it.</p><a className="contact-email" href="mailto:fouad.smlaji@gmail.com">fouad.smlaji@gmail.com <span aria-hidden="true">↗</span></a><div className="contact-socials"><a className="contact-link" href="https://www.linkedin.com/in/fouad-smlaji-3272263a2" target="_blank" rel="noreferrer">LinkedIn ↗</a><a className="contact-link" href="https://github.com/fouadsmlaji" target="_blank" rel="noreferrer">GitHub ↗</a><a className="contact-link" href="tel:+96358987736">+963 958 987 736</a></div></div>
-        <footer className="site-footer"><a href="#home">FOUAD SMLAJI <span>© {new Date().getFullYear()}</span></a><span>Made with curiosity and care <b>✳</b></span><a href="#home">Back to top ↑</a></footer>
+        <footer className="site-footer"><a href="#home">FOUAD SMLAJI <span>© {new Date().getFullYear()}</span></a><span>Made with curiosity and care</span><a href="#home">Back to top ↑</a></footer>
       </section>
     </main>
   )

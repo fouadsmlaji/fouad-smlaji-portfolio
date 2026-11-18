@@ -41,7 +41,6 @@
 .hero-video-caption { position:absolute; z-index:1; bottom:17px; left:18px; font:italic 1.2rem Georgia,serif; color:white; }
 .hero-art-stamp { position:absolute; z-index:2; right:-40px; top:40%; width:105px; height:105px; display:flex; flex-direction:column; align-items:center; justify-content:center; border:1px solid var(--ink); border-radius:50%; background:var(--green); color:var(--ink); transform:rotate(9deg); box-shadow:0 0 0 7px var(--ink); text-align:center; font-size:.57rem; line-height:1.2; letter-spacing:.11em; font-weight:700; }
 .hero-art-stamp i { font:italic .76rem Georgia,serif; letter-spacing:0; }
-.hero-art-stamp b { position:absolute; right:8px; top:2px; font-size:1.3rem; }
 .hero-scroll-cue { position:absolute; bottom:22px; left:max(5vw,calc((100vw - 1380px)/2)); display:flex; align-items:center; gap:10px; color:#898c81; font-size:.68rem; text-decoration:none; letter-spacing:.08em; text-transform:uppercase; }
 .hero-scroll-cue span { height:28px; width:1px; background:var(--green); }
 .ticker { overflow:hidden; border-bottom:1px solid rgba(24,26,23,.13); background:var(--green); }
@@ -63,7 +62,6 @@
 .inline-link:hover span { transform:translate(3px,-3px); }
 .toolkit-row { display:grid; grid-template-columns:210px 1fr; gap:35px; padding:28px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); }
 .toolkit-label { display:flex; align-items:center; gap:13px; }
-.toolkit-star { font-size:2rem; color:#8a9c53; }
 .toolkit-label b,.toolkit-label small { display:block; }
 .toolkit-label b { font-size:.82rem; }
 .toolkit-label small { margin-top:4px; color:#77796f; font-size:.7rem; }
