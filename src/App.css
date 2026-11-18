@@ -8,3 +8,96 @@ body {
   font-family: 'Poppins', sans-serif;
   overflow-x: hidden;
 }
+
+.intro-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #181a17;
+  color: #f3f0e8;
+  animation: introCurtain .58s cubic-bezier(.78, 0, .2, 1) .88s forwards;
+}
+
+.intro-loader-content {
+  width: min(380px, calc(100vw - 52px));
+  position: relative;
+  z-index: 1;
+}
+
+.intro-loader-brand {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.intro-loader-mark {
+  color: #c6ed70;
+  font-size: 4.8rem;
+  font-weight: 500;
+  letter-spacing: -.12em;
+  line-height: .9;
+}
+
+.intro-loader-mark span { color: #f3f0e8; }
+
+.intro-loader-name {
+  font-size: .84rem;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: .18em;
+}
+
+.intro-loader-caption {
+  margin: 29px 0 22px;
+  color: #b5b8ac;
+  font: italic 1.12rem Georgia, 'Times New Roman', serif;
+}
+
+.intro-loader-track {
+  height: 2px;
+  overflow: hidden;
+  background: rgba(255,255,255,.18);
+}
+
+.intro-loader-track span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #c6ed70;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: loaderProgress 1.12s cubic-bezier(.55, 0, .25, 1) .08s forwards;
+}
+
+.intro-loader-foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 11px;
+  color: #85897d;
+  font-size: .54rem;
+  letter-spacing: .1em;
+}
+
+.intro-loader-orbit {
+  position: absolute;
+  right: 12%;
+  bottom: 8%;
+  color: rgba(198,237,112,.14);
+  font-size: clamp(12rem, 34vw, 34rem);
+  line-height: 1;
+  animation: orbitTurn 22s linear infinite;
+}
+
+@keyframes loaderProgress { to { transform: scaleX(1); } }
+@keyframes orbitTurn { to { transform: rotate(360deg); } }
+@keyframes introCurtain { to { transform: translateY(-101%); visibility: hidden; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .intro-loader { animation:none; }
+  .intro-loader-track span { animation:none; transform:scaleX(1); }
+  .intro-loader-orbit { animation:none; }
+}

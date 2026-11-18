@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { createPortal } from 'react-dom'
 import './Header.css'
@@ -13,6 +13,7 @@ function scrollToContact() {
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const progressRef = useRef(null)
   const location = useLocation()
   const navigate = useNavigate()
   const isProjectDetails = location.pathname.startsWith('/project')
@@ -29,11 +30,26 @@ export default function Header() {
   }
 
   useEffect(() => {
-    const check = () => setScrolled(window.scrollY > 50)
+    let frame = null
+    const check = () => {
+      if (frame !== null) return
+      frame = window.requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 50)
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight
+        const progress = scrollable > 0 ? window.scrollY / scrollable : 0
+        if (progressRef.current) progressRef.current.style.transform = `scaleX(${progress})`
+        frame = null
+      })
+    }
     check()
     window.addEventListener('scroll', check, { passive: true })
-    return () => window.removeEventListener('scroll', check)
-  }, [])
+    window.addEventListener('resize', check)
+    return () => {
+      window.removeEventListener('scroll', check)
+      window.removeEventListener('resize', check)
+      if (frame !== null) window.cancelAnimationFrame(frame)
+    }
+  }, [location.pathname])
 
   useEffect(() => {
     if (menuOpen) document.body.style.overflow = 'hidden'
@@ -56,6 +72,7 @@ export default function Header() {
 
   const headerContent = (
     <>
+      <div ref={progressRef} className="site-scroll-progress" aria-hidden="true" />
       <header className={`header ${showScrolledBg ? 'header-scrolled' : ''} ${isProjectDetails ? 'header-project-page' : ''} ${isHome ? 'header-home-page' : ''} ${menuOpen ? 'header-menu-open' : ''}`}>
         <nav className="header-nav">
           <div className="header-nav-left">

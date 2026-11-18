@@ -135,6 +135,26 @@
 .site-footer a:first-child span { margin-left:7px; color:#85877d; font-weight:400; }
 .site-footer b { padding-left:5px; color:#85994d; font-size:1rem; }
 
+/* Calm, intentional motion tied to the page scroll. */
+.hero-enter { opacity:0; animation:heroEnter .75s cubic-bezier(.2,.7,.2,1) forwards; }
+.hero-enter-1 { animation-delay:.08s; }
+.hero-enter-2 { animation-delay:.2s; }
+.hero-enter-3 { animation-delay:.32s; }
+.hero-enter-4 { animation-delay:.44s; }
+@keyframes heroEnter { from { opacity:0; transform:translateY(22px); filter:blur(5px); } to { opacity:1; transform:translateY(0); filter:blur(0); } }
+[data-reveal] { opacity:0; transform:translateY(28px); filter:blur(2px); transition:opacity .75s cubic-bezier(.2,.7,.2,1), transform .75s cubic-bezier(.2,.7,.2,1), filter .75s ease; transition-delay:var(--reveal-delay, 0ms); will-change:opacity,transform; }
+[data-reveal="left"] { transform:translateX(-24px); }
+[data-reveal="scale"] { transform:translateY(18px) scale(.975); }
+[data-reveal].is-visible { opacity:1; transform:translate(0) scale(1); filter:blur(0); }
+.toolkit-list span { opacity:0; transform:translateY(8px); transition:opacity .4s ease, transform .4s cubic-bezier(.2,.7,.2,1), background .2s ease,border .2s ease; transition-delay:var(--reveal-delay, 0ms); }
+.toolkit-row.is-visible .toolkit-list span { opacity:1; transform:translateY(0); }
+.project-card { transition:border-color .3s ease, box-shadow .35s ease; }
+.project-item:hover .project-card { border-color:rgba(198,237,112,.58); box-shadow:0 18px 38px rgba(0,0,0,.22); }
+.process-card { transition:background .25s ease,padding-left .25s ease; }
+.process-card:hover { background:rgba(255,255,255,.16); padding-left:12px; }
+.ticker:hover .ticker-track { animation-play-state:paused; }
+.site-scroll-progress { position:fixed; z-index:1201; top:0; left:0; width:100%; height:2px; transform:scaleX(0); transform-origin:left center; background:#c6ed70; pointer-events:none; will-change:transform; }
+
 @media (max-width:1050px) {
   .hero-section { padding-right:6vw; padding-left:6vw; }
   .hero-grid { gap:50px; }
@@ -207,4 +227,7 @@
 }
 @media (prefers-reduced-motion: reduce) {
   *,*::before,*::after { scroll-behavior:auto !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
+  .hero-enter,[data-reveal] { opacity:1 !important; transform:none !important; filter:none !important; animation-delay:0ms !important; }
+  .toolkit-list span { opacity:1; transform:none; }
+  .ticker-track { animation:none; }
 }
