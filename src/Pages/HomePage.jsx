@@ -10,6 +10,27 @@ const process = [
   { number: '03', title: 'Make it real', text: 'Build, refine, and launch a fast experience that feels right everywhere.' },
 ]
 
+function tiltElement(event, selector, amount = 5) {
+  const element = event.currentTarget.matches(selector) ? event.currentTarget : event.currentTarget.querySelector(selector)
+  if (!element) return
+  const bounds = event.currentTarget.getBoundingClientRect()
+  const x = (event.clientX - bounds.left) / bounds.width
+  const y = (event.clientY - bounds.top) / bounds.height
+  element.style.setProperty('--tilt-x', `${((x - 0.5) * amount * 2).toFixed(2)}deg`)
+  element.style.setProperty('--tilt-y', `${((0.5 - y) * amount * 2).toFixed(2)}deg`)
+  element.style.setProperty('--pointer-x', `${(x * 100).toFixed(1)}%`)
+  element.style.setProperty('--pointer-y', `${(y * 100).toFixed(1)}%`)
+}
+
+function resetTilt(event, selector) {
+  const element = event.currentTarget.matches(selector) ? event.currentTarget : event.currentTarget.querySelector(selector)
+  if (!element) return
+  element.style.setProperty('--tilt-x', '0deg')
+  element.style.setProperty('--tilt-y', '0deg')
+  element.style.setProperty('--pointer-x', '50%')
+  element.style.setProperty('--pointer-y', '50%')
+}
+
 export default function HomePage() {
   const [showAllProjects, setShowAllProjects] = useState(false)
   const visibleProjects = showAllProjects ? projects : projects.slice(0, 4)
@@ -56,7 +77,7 @@ export default function HomePage() {
             </div>
             <div className="hero-footnote"><span>Independent practice</span><span>Design · Development · Direction</span></div>
           </div>
-          <div className="hero-art hero-enter hero-enter-3" aria-label="A glimpse into Fouad’s creative process">
+          <div className="hero-art hero-enter hero-enter-3" aria-label="A glimpse into Fouad’s creative process" onMouseMove={(event) => tiltElement(event, '.hero-art', 3)} onMouseLeave={(event) => resetTilt(event, '.hero-art')}>
             <div className="hero-art-topline"><span>IDEAS IN MOTION</span><span>© FS — {new Date().getFullYear()}</span></div>
             <div className="hero-video-wrap">
               <video src={`${import.meta.env.BASE_URL}assets/videos/Intro.mp4`} autoPlay loop muted playsInline aria-label="Abstract creative process animation" />
@@ -88,7 +109,7 @@ export default function HomePage() {
           <div className="projects-header" data-reveal="up"><div><p className="section-kicker">A few things I’ve made</p><h2 className="projects-title">Made with<br /><em>meaning.</em></h2></div><p className="projects-intro">Different people, different challenges. One shared belief: the details make the difference.</p></div>
           <div className="projects-cards">
             {visibleProjects.map((project, index) => (
-              <Link key={project.name} to={`/project/${index}`} className="project-item" data-reveal="up" style={{ '--reveal-delay': `${(index % 4) * 75}ms` }}>
+              <Link key={project.name} to={`/project/${index}`} className="project-item" data-reveal="up" style={{ '--reveal-delay': `${(index % 4) * 75}ms` }} onMouseMove={(event) => tiltElement(event, '.project-card', 2.5)} onMouseLeave={(event) => resetTilt(event, '.project-card')}>
                 <article className="project-card"><span className="project-index" aria-hidden="true">{String(index + 1).padStart(2, '0')} <i>/ {String(projects.length).padStart(2, '0')}</i></span><div className="project-thumb"><img src={project.thumb} alt={project.name} style={project.objectPosition ? { objectPosition: project.objectPosition } : undefined} loading={index > 1 ? 'lazy' : 'eager'} /></div><span className="project-open" aria-hidden="true">↗</span></article>
                 <div className="project-meta"><div className="project-meta-row"><div className="project-icon"><img src={project.logo || project.thumb} alt="" loading="lazy" /></div><div className="project-text"><span className="project-name">{project.name}</span><span className="project-location">{project.location}</span></div></div><span className="project-meta-arrow" aria-hidden="true">↗</span></div>
               </Link>
