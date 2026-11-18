@@ -27,5 +27,13 @@ body {
 }
 
 body.scrolled {
-  background-color: #000;
+  background-color: #f5f3ef;
+}
+
+:root {
+  color-scheme: light;
+  --paper: #f5f3ef;
+  --ink: #171815;
+  --muted: #6d6e68;
+  --accent: #c8f169;
 }

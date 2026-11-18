@@ -167,17 +167,17 @@ export default function HomePage() {
   return (
    <div id="home" className={`home-page ${isScrolled ? 'scrolled' : ''}`}>
     <div className="home-page-content">
+    <p className="hero-eyebrow fadeIn"><span /> Independent designer & developer</p>
     <h1 className="home-page-title fadeIn">
-      {isScrolled ? 'And Rise As' : 'Where Ideas '}
-      <br />
-      {isScrolled ? 'Worlds Of Code.' : 'Begin As Wispers.'}
+      Thoughtful digital<br /><em>experiences</em> that work.
     </h1>
     <p className="home-page-description fadeIn">
-      {isScrolled
-        ? 'Scroll to discover a new perspective.'
-        : "Discover, search, and save what's next."}
+      I’m Fouad — I turn ambitious ideas into clear, considered websites and products.
     </p>
-    <a href="#about" className="home-page-button fadeIn">Get Started</a>
+    <div className="hero-actions fadeIn">
+      <a href="#projects" className="home-page-button">Explore my work <span aria-hidden="true">↗</span></a>
+      <a href="#contact" className="hero-text-link">Have a project in mind? <span>Let’s talk ↗</span></a>
+    </div>
     </div>
 
     <section className="banner-section" aria-label="Programming values banner">
@@ -199,9 +199,10 @@ export default function HomePage() {
       className={`about-section ${aboutVisible ? 'about-visible' : ''}`}
     >
       <h2 className="about-title">
-        <span className="about-title-line">Discover The Mind </span>
-        <span className="about-title-line">Behind The Code.</span>
+        <span className="about-title-line">Good work starts with</span>
+        <span className="about-title-line">understanding people.</span>
       </h2>
+      <p className="about-description">From the first sketch to the final line of code, I bring design and engineering together to make digital experiences feel effortless.</p>
       <div className="about-panel">
         <video
           className="about-panel-video"
@@ -221,15 +222,15 @@ export default function HomePage() {
     >
       <div className="container">
         <div className="projects-header">
-          <h2 className="projects-title"> Selected Work That Speaks for Itself.</h2>
+          <div><p className="section-kicker">A few things I’ve made</p><h2 className="projects-title">Selected work<span>.</span></h2></div>
           <div className="projects-actions">
-            <a href="#contact" className="projects-button primary">Book a call</a>
+            <a href="#contact" className="projects-button primary">Start a project <span aria-hidden="true">↗</span></a>
             <button
               className="projects-button"
               type="button"
               onClick={() => setShowAllProjects((prev) => !prev)}
             >
-              {showAllProjects ? 'Show Less' : 'Show More'}
+              {showAllProjects ? 'Show less' : 'View all projects'}
             </button>
           </div>
         </div>
@@ -313,9 +314,10 @@ export default function HomePage() {
 
     <section id="contact" className="contact-section">
       <div className="contact-content">
-        <h2 className="contact-title">Let's Build Something Great</h2>
+        <p className="section-kicker">Have a good one in mind?</p>
+        <h2 className="contact-title">Let’s make it<br /><em>real.</em></h2>
         <p className="contact-subtitle">
-          Have a project in mind? Let's connect and make it happen.
+          Tell me what you’re working on. I’d love to hear about it.
         </p>
         <div className="contact-socials">
           <a className="contact-link" href="https://www.linkedin.com/in/fouad-smlaji-3272263a2" target="_blank" rel="noreferrer" aria-label="LinkedIn">
@@ -336,7 +338,7 @@ export default function HomePage() {
             </svg>
             +963 958 987 736
           </a>
-          <a className="contact-link" href="mailto:fouad.smlaji@gamil.com" aria-label="Email">
+          <a className="contact-link" href="mailto:fouad.smlaji@gmail.com" aria-label="Email">
             <svg className="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
               <polyline points="22,6 12,13 2,6"/>

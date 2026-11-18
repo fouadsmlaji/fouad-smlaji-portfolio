@@ -118,7 +118,8 @@
   .contact-section {
     padding: 5rem 1.5rem 8rem;
     min-height: 100vh;
-    align-items: flex-end;
+    align-items: center;
+    text-align: center;
   }
 
   .contact-content {
@@ -215,12 +216,12 @@
 
   /* Hero / Home */
   .home-page-content {
-    min-height: 70vh;
-    padding: 15rem 1rem 1rem 1rem;
+    min-height: 82svh;
+    padding: 8rem 1rem 4rem;
   }
 
   .home-page-title {
-    font-size: 2.5rem;
+    font-size: clamp(3rem, 13vw, 4.4rem);
   }
 
   .home-page-description {
@@ -349,14 +350,16 @@
   }
 
   .contact-socials {
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
   }
 
   .contact-link {
-    width: 100%;
-    max-width: 280px;
+    width: auto;
+    max-width: none;
     justify-content: center;
     padding: 0.6rem 1rem;
     font-size: 0.875rem;
@@ -377,4 +380,10 @@
     letter-spacing: -2px !important;
     line-height: 1.15;
   }
+}
+
+@media (max-width: 768px) {
+  .home-page-content { min-height: 88svh; padding: 8rem 1.25rem 4rem; }
+  .about-panel { height: auto; }
+  .contact-section { align-items: center; text-align: center; }
 }
